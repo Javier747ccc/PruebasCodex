@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 
-def animate_point(points, step_time=0.4, output='animation.gif'):
+def animate_point(points, step_time=0.4, steps_per_segment=10, output='animation.gif'):
     """Animate a dot moving along the provided list of points.
 
     Parameters
@@ -11,11 +11,28 @@ def animate_point(points, step_time=0.4, output='animation.gif'):
         Sequence of (x, y) coordinates describing the path.
     step_time : float, optional
         Seconds between each frame of the animation.
+    steps_per_segment : int, optional
+        How many interpolation steps to insert between consecutive
+        points. A higher value results in smoother movement.
     output : str, optional
         Filename for the resulting GIF animation.
     """
     if not points:
         raise ValueError("Points list must not be empty")
+
+    # Interpolate additional points between path coordinates for smoother
+    # motion. "steps_per_segment" controls the number of sub-steps between
+    # every pair of original points.
+    if steps_per_segment > 1:
+        expanded = []
+        for (x1, y1), (x2, y2) in zip(points, points[1:]):
+            for i in range(steps_per_segment):
+                t = i / steps_per_segment
+                x = x1 + t * (x2 - x1)
+                y = y1 + t * (y2 - y1)
+                expanded.append((x, y))
+        expanded.append(points[-1])
+        points = expanded
 
     xs, ys = zip(*points)
     fig, ax = plt.subplots()
