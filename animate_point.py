@@ -42,8 +42,9 @@ def animate_point(points, step_time=0.1, output='animation.gif'):
         blit=True,
         repeat=False,
     )
-    ani.save(output, writer=animation.PillowWriter(fps=1 / step_time))
-    plt.close(fig)
+    if output:
+        ani.save(output, writer=animation.PillowWriter(fps=1 / step_time))
+    plt.show()
 
 
 if __name__ == "__main__":
