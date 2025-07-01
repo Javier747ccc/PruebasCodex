@@ -29,7 +29,8 @@ def animate_point(points, step_time=0.1, output='animation.gif'):
 
     def update(frame):
         x, y = points[frame]
-        dot.set_data(x, y)
+        # set_data expects sequences, so wrap scalars in lists
+        dot.set_data([x], [y])
         return dot,
 
     ani = animation.FuncAnimation(
