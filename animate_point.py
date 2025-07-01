@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 
-def animate_point(points, step_time=0.4, steps_per_segment=10, output='animation.gif'):
+def animate_point(points, step_time=0.4, steps_per_segment=20, output='animation.gif'):
     """Animate a dot moving along the provided list of points.
 
     Parameters
