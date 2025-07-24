@@ -25,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Enviamos
     if (mail($to, $subject, $body, $headers)) {
         // Redirigimos de vuelta con parámetro de éxito
-        header('Location: index.html?enviado=1#contacto');
+        header('Location: index.php?enviado=1#contacto');
         exit;
     } else {
         // Redirigimos con error
-        header('Location: index.html?enviado=0#contacto');
+        header('Location: index.php?enviado=0#contacto');
         exit;
     }
 }
